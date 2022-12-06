@@ -1,0 +1,434 @@
+<title>Books</title>
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700');
+
+    @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+    @import url("https://fonts.google.com/icons?selected=Material%20Icons%20Outlined%3Aadd%3A");
+    @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+    $base-spacing-unit: 24px;
+    $half-spacing-unit: $base-spacing-unit / 2;
+
+    $color-alpha: #1772FF;
+    $color-form-highlight: #EEEEEE;
+
+    *,
+    *:before,
+    *:after {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-size: x-large;
+        padding: $base-spacing-unit;
+        font-family: "Montserrat", sans-serif;
+        ;
+        background-color: #080710;
+    }
+
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin: 0;
+    }
+
+    .container {
+        max-width: 1000px;
+        margin-right: auto;
+        margin-left: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    .wrapper {
+        display: inline-flex;
+        margin-top: 10%;
+        margin-left: 90%;
+    }
+
+    .wrapper .icon {
+        position: relative;
+        background-color: #ffffff;
+        border-radius: 50%;
+        padding: 15px;
+        margin: 10px;
+        width: 50px;
+        height: 50px;
+        font-size: 18px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .wrapper .tooltip {
+        position: absolute;
+        top: 0;
+        font-size: 14px;
+        background-color: #ffffff;
+        color: #ffffff;
+        padding: 5px 8px;
+        border-radius: 5px;
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .wrapper .tooltip::before {
+        position: absolute;
+        content: "";
+        height: 8px;
+        width: 8px;
+        background-color: #ffffff;
+        bottom: -3px;
+        left: 50%;
+        transform: translate(-50%) rotate(45deg);
+        transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .wrapper .icon:hover .tooltip {
+        top: -45px;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    .wrapper .icon:hover span,
+    .wrapper .icon:hover .tooltip {
+        text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+    }
+
+    .wrapper .facebook:hover,
+    .wrapper .facebook:hover .tooltip,
+    .wrapper .facebook:hover .tooltip::before {
+        background-color: #3b5999;
+        color: #ffffff;
+    }
+
+    .wrapper .twitter:hover,
+    .wrapper .twitter:hover .tooltip,
+    .wrapper .twitter:hover .tooltip::before {
+        background-color: #46c1f6;
+        color: #ffffff;
+    }
+
+
+    .table {
+        width: 80%;
+        margin-left: 10%;
+        border: 1px solid white;
+        clear: both;
+         !important;
+    }
+
+    .table-header {
+        display: flex;
+        margin-top: 10px;
+        width: 100%;
+        background: #000;
+        padding: ($half-spacing-unit * 1.5) 0;
+    }
+
+    .table-row {
+        display: flex;
+        width: 100%;
+        font-size: large;
+        margin-top: 10px;
+        padding: ($half-spacing-unit * 1.5) 0;
+
+        &:nth-of-type(odd) {
+            background: $color-form-highlight;
+        }
+    }
+
+    .table-data,
+    .header__item {
+        flex: 1 1 20%;
+        text-align: center;
+        color: white;
+    }
+
+    .header__item {
+        text-transform: uppercase;
+        color: white;
+    }
+
+    .filter__link {
+        color: white;
+        text-decoration: none;
+        position: relative;
+        display: inline-block;
+        padding-left: $base-spacing-unit;
+        padding-right: $base-spacing-unit;
+
+        &::after {
+            content: '';
+            position: absolute;
+            right: -($half-spacing-unit * 1.5);
+            color: white;
+            font-size: $half-spacing-unit;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        &.desc::after {
+            content: '(desc)';
+        }
+
+        &.asc::after {
+            content: '(asc)';
+        }
+
+    }
+
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    *:focus,
+    *:active {
+        outline: none !important;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .navMenu {
+        position: absolute;
+        top: 7%;
+        left: 49%;
+        font-size: medium;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+
+    .navMenu a {
+        margin-left: 22px;
+        color: #f6f4e6;
+        text-decoration: none;
+        font-size: 1.2em;
+        text-transform: uppercase;
+        font-weight: 400;
+        display: inline-block;
+        width: 80px;
+        -webkit-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .navMenu a:hover {
+        color: #fddb3a;
+    }
+
+    .navMenu .dot {
+        width: 6px;
+        height: 6px;
+        background: #fddb3a;
+        border-radius: 50%;
+        opacity: 0;
+        -webkit-transform: translateX(30px);
+        transform: translateX(30px);
+        -webkit-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .navMenu a:nth-child(1):hover~.dot {
+        -webkit-transform: translateX(48px);
+        transform: translateX(48px);
+        -webkit-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+        opacity: 1;
+    }
+
+    .navMenu a:nth-child(2):hover~.dot {
+        -webkit-transform: translateX(165px);
+        transform: translateX(165px);
+        -webkit-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+        opacity: 1;
+    }
+
+    .open-button {
+        background-color: #555;
+        color: white;
+        padding: 16px 20px;
+        border: none;
+        cursor: pointer;
+        opacity: 0.8;
+        position: fixed;
+        bottom: 23px;
+        right: 28px;
+        width: 280px;
+    }
+
+    /* The popup form - hidden by default */
+    .form-popup {
+        display: none;
+        position: fixed;
+        bottom: 0;
+        right: 15px;
+        border: 3px solid #f1f1f1;
+        z-index: 9;
+    }
+
+    /* Add styles to the form container */
+    .form-container {
+        max-width: 300px;
+        padding: 10px;
+        background-color: white;
+    }
+
+    /* Full-width input fields */
+    .form-container input[type=text],
+    .form-container input[type=password] {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        border: none;
+        background: #f1f1f1;
+    }
+
+    /* When the inputs get focus, do something */
+    .form-container input[type=text]:focus,
+    .form-container input[type=password]:focus {
+        background-color: #ddd;
+        outline: none;
+    }
+
+    /* Set a style for the submit/login button */
+    .form-container .btn {
+        background-color: #04AA6D;
+        color: white;
+        padding: 16px 20px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        margin-bottom: 10px;
+        opacity: 0.8;
+    }
+
+    /* Add a red background color to the cancel button */
+    .form-container .cancel {
+        background-color: red;
+    }
+
+    /* Add some hover effects to buttons */
+    .form-container .btn:hover,
+    .open-button:hover {
+        opacity: 1;
+    }
+</style>
+
+<body onload=check()>
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    <div class="wrapper">
+        <div class="icon facebook" onClick="location.href='/add_book'">
+            <div class="tooltip">Add</div>
+            <span>+</span>
+        </div>
+        <div class="icon twitter" onclick="openForm()">
+            <div class="tooltip">Delete</div>
+            <span>-</span>
+        </div>
+        <div class="form-popup" id="myForm">
+            <form action="/books" method="post" class="form-container">
+                <h1>Delete Book</h1>
+                <label for="id"><b>ID</b></label>
+                <input type="text" placeholder="Book ID" name="id" required>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    <nav class="navMenu">
+        <a href="/">Home</a>
+        <a href="/logout">Logout</a>
+        <div class="dot"></div>
+    </nav>
+    <div class="table">
+        <div class="table-header">
+            <div class="header__item"><a id="name" class="filter__link" href="#">Book ID</a></div>
+            <div class="header__item"><a id="wins" class="filter__link filter__link--number" href="#">Title</a>
+            </div>
+            <div class="header__item"><a id="draws" class="filter__link filter__link--number" href="#">Edition</a>
+            </div>
+            <div class="header__item"><a id="losses" class="filter__link filter__link--number" href="#">Genre</a>
+            </div>
+            <div class="header__item"><a id="total" class="filter__link filter__link--number" href="#">Cost</a>
+            </div>
+            <div class="header__item"><a id="total" class="filter__link filter__link--number" href="#">Publisher
+                    ID</a></div>
+        </div>
+        <% names.data.forEach((item)=>{%>
+            <div class="table-content">
+                <div class="table-row">
+                    <div class="table-data">
+                        <%= item.book_id %>
+                    </div>
+                    <div class="table-data">
+                        <%= item.title %>
+                    </div>
+                    <div class="table-data">
+                        <%= item.edition %>
+                    </div>
+                    <div class="table-data">
+                        <%= item.genre %>
+                    </div>
+                    <div class="table-data">
+                        <%= item.cost %>
+                    </div>
+                    <div class="table-data">
+                        <%= item.publisher_id %>
+                    </div>
+                </div>
+            </div>
+            <% })%>
+
+
+    </div>
+</body>
+<script>
+    body.onload() = check();
+    function check() {
+        var type;
+        var cookie = document.cookie.split(';')
+        for (var i = 0; i < cookie.length; i++) {
+            var cookiePair = cookie[i].split("=");
+            if ("type" == cookiePair[0].trim()) {
+                type = decodeURIComponent(cookiePair[1]);
+                break;
+            }
+
+        }
+        if (type == null) {
+            window.location.replace('http://localhost:4000/login');
+        }
+        if (type !== 'A' && type !== 'S') {
+            window.location.replace('http://localhost:4000/login');
+        }
+    }
+</script>
+<script>
+    function openForm() {
+        document.getElementById("myForm").style.display = "block";
+    }
+
+    function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+    }
+</script>

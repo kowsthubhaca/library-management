@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+
+<html>
+<title>Return</title>
+
+<style>
+  .colorgraph {
+    height: 5px;
+    border-top: 0;
+    background: #c4e17f;
+    border-radius: 5px;
+    background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+    background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+    background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+    background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  }
+
+  body {
+    background-color: #080710;
+    font-family: "Montserrat", sans-serif;
+  }
+
+  .background {
+    width: 430px;
+    height: 520px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+  }
+
+  .background .shape {
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    border-radius: 50%;
+  }
+
+  .shape:first-child {
+    background: linear-gradient(#1845ad,
+        #23a2f6);
+    left: -80px;
+    top: -80px;
+  }
+
+  .shape:last-child {
+    background: linear-gradient(to right,
+        #ff512f,
+        #f09819);
+    right: -30px;
+    bottom: -80px;
+  }
+
+  .navMenu {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+
+  .navMenu a {
+    color: #f6f4e6;
+    text-decoration: none;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    font-weight: 500;
+    display: inline-block;
+    width: 80px;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .navMenu a:hover {
+    color: #fddb3a;
+  }
+
+  .navMenu .dot {
+    width: 6px;
+    height: 6px;
+    background: #fddb3a;
+    border-radius: 50%;
+    opacity: 0;
+    -webkit-transform: translateX(30px);
+    transform: translateX(30px);
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .navMenu a:nth-child(1):hover~.dot {
+    -webkit-transform: translateX(30px);
+    transform: translateX(30px);
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    opacity: 1;
+  }
+
+  .navMenu a:nth-child(2):hover~.dot {
+    -webkit-transform: translateX(125px);
+    transform: translateX(125px);
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    opacity: 1;
+  }
+
+  .box1 {
+    margin-top: 5%;
+  }
+</style>
+<link href="/Return/return.css" rel="stylesheet" id="bootstrap-css">
+<script src="/Return/return.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<body onload=check()>
+  <div class="background">
+    <div class="shape"></div>
+    <div class="shape"></div>
+  </div>
+  <nav class="navMenu">
+    <a href="/">Home</a>
+    <a href="/logout">Logout</a>
+    <div class="dot"></div>
+  </nav>
+  <div class="box1">
+    <form role="form" action="/return" method="post">
+      <fieldset>
+        <!-- <hr class="colorgraph"> -->
+        <div class="form-group">
+          <input type="number" name="id" id="scholar_id" class="form-control input-lg" placeholder="Scholar ID"
+            required>
+        </div>
+        <div class="form-group">
+          <input type="number" name="book_id" id="bookid" class="form-control input-lg" placeholder="Return Book ID"
+            required>
+        </div>
+        <hr class="colorgraph">
+        <div class="row">
+          <button type="submit"> Return Book </button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+
+</body>
+<script>
+  body.onload() = check();
+  function check() {
+    var type;
+    var cookie = document.cookie.split(';')
+    for (var i = 0; i < cookie.length; i++) {
+      var cookiePair = cookie[i].split("=");
+      if ("type" == cookiePair[0].trim()) {
+        type = decodeURIComponent(cookiePair[1]);
+        break;
+      }
+
+    }
+    if (type == null) {
+      window.location.replace('http://localhost:4000/login');
+    }
+    if (type !== 'A' && type !== 'S') {
+      window.location.replace('http://localhost:4000/login');
+    }
+    else if (type !== "A") {
+      window.location.replace('http://localhost:4000/');
+    }
+  }
+</script>
+
+</html>

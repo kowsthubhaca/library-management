@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html>
+    <link href="/Fine/fine.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <title>Fine</title>
+
+    <body onload=check()>
+
+    <div class="row" style="margin-top:20px">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+            <form role="form" action="/fine" method="post" >
+                <fieldset>
+                    <h2>Please pay the fine amount </h2>
+                    <hr class="colorgraph">
+                    <div class="form-group">
+                        <h2 id="fine" > </h2>
+                    <div class="row">
+                        <div class="submit-group">
+                            <button type="submit"> Pay Now </button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</body>
+<script >
+    body.onload() = check();
+      function check() {
+        var type;
+        var cookie = document.cookie.split(';')
+        for(var i = 0; i < cookie.length; i++) {
+          var cookiePair = cookie[i].split("=");
+          if("type" == cookiePair[0].trim()) {
+              type =  decodeURIComponent(cookiePair[1]);
+              break;
+          }
+      } 
+        if (type!=="A" && type!=="S") {
+          window.location.replace('http://localhost:4000/login');
+        }
+        else if(type!=="A"){
+            window.location.replace('http://localhost:4000/');
+        }
+    }        
+  </script>
+<script>
+    document.getElementById("fine").innerHTML = document.cookie.split(';')[1].substring(6,);
+</script>
+
+</html>

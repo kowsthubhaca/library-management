@@ -1,0 +1,226 @@
+<title>Member</title>
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700');
+
+    $base-spacing-unit: 24px;
+    $half-spacing-unit: $base-spacing-unit / 2;
+
+    $color-alpha: #1772FF;
+    $color-form-highlight: #EEEEEE;
+
+    *,
+    *:before,
+    *:after {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-size: x-large;
+        padding: $base-spacing-unit;
+        font-family: 'Source Sans Pro', sans-serif;
+        margin: 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin: 0;
+    }
+
+    .container {
+        max-width: 1000px;
+        margin-right: auto;
+        margin-left: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    .table {
+        width: 100%;
+        border: 1px solid $color-form-highlight;
+        clear: both;
+    }
+
+    .table-header {
+        display: flex;
+        width: 100%;
+        background: #000;
+        padding: ($half-spacing-unit * 1.5) 0;
+    }
+
+    .table-row {
+        display: flex;
+        width: 100%;
+        padding: ($half-spacing-unit * 1.5) 0;
+
+        &:nth-of-type(odd) {
+            background: $color-form-highlight;
+        }
+    }
+
+    .table-data,
+    .header__item {
+        flex: 1 1 20%;
+        text-align: center;
+    }
+
+    .header__item {
+        text-transform: uppercase;
+    }
+
+    .filter__link {
+        color: white;
+        text-decoration: none;
+        position: relative;
+        display: inline-block;
+        padding-left: $base-spacing-unit;
+        padding-right: $base-spacing-unit;
+
+        &::after {
+            content: '';
+            position: absolute;
+            right: -($half-spacing-unit * 1.5);
+            color: white;
+            font-size: $half-spacing-unit;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        &.desc::after {
+            content: '(desc)';
+        }
+
+        &.asc::after {
+            content: '(asc)';
+        }
+
+    }
+    body {
+        background: #272727;
+        font-family: "Montserrat", sans-serif;
+      }
+      
+      .navMenu {
+        position: absolute;
+        top: 5%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+      }
+      
+      .navMenu a {
+        color: #f6f4e6;
+        text-decoration: none;
+        font-size: 1.2em;
+        text-transform: uppercase;
+        font-weight: 500;
+        display: inline-block;
+        width: 80px;
+        -webkit-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+      }
+      
+      .navMenu a:hover {
+        color: #fddb3a;
+      }
+      
+      .navMenu .dot {
+        width: 6px;
+        height: 6px;
+        background: #fddb3a;
+        border-radius: 50%;
+        opacity: 0;
+        -webkit-transform: translateX(30px);
+        transform: translateX(30px);
+        -webkit-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+      }
+      
+      .navMenu a:nth-child(1):hover ~ .dot {
+        -webkit-transform: translateX(30px);
+        transform: translateX(30px);
+        -webkit-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+        opacity: 1;
+      }
+      
+      .navMenu a:nth-child(2):hover ~ .dot {
+        -webkit-transform: translateX(125px);
+        transform: translateX(125px);
+        -webkit-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+        opacity: 1;
+      }
+</style>
+
+<body onload=check()>
+    <nav class="navMenu">
+        <a href="/">Home</a>
+        <a href="/logout">Logout</a>
+        <div class="dot"></div>
+      </nav>
+    <div class="container">
+        <!-- <div class="wrapper">
+            <div class="icon facebook" onclick="">
+              <div class="tooltip" >Add</div>
+              <span><i class="fas fa-plus">+</i></span>
+            </div>
+            <div class="icon twitter">
+              <div class="tooltip">Delete</div>
+              <span><i class="fas fa-trash">-</i></span>
+            </div>
+          </div> -->
+        <div class="table">
+            <div class="table-header">
+                <div class="header__item"><a id="name" class="filter__link" href="#">Member ID</a></div>
+                <div class="header__item"><a id="wins" class="filter__link filter__link--number" href="#">Member Name</a>
+                </div>
+                <div class="header__item"><a id="draws" class="filter__link filter__link--number" href="#">Expiry Date</a>
+                </div>
+                
+            </div>
+            <% names.data.forEach((item)=>{%>
+                <div class="table-content">
+                    <div class="table-row">
+                        <div class="table-data">
+                            <%= item.member_id %>
+                        </div>
+                        <div class="table-data">
+                            <%= item.m_name %>
+                        </div>
+                        <div class="table-data">
+                            <%= item.expiry_date.toLocaleDateString('en-CA') %>
+                        </div>
+                    </div>
+                </div>
+                <% })%>
+
+
+        </div>
+</body>
+
+<script>
+    body.onload() = check();
+      function check() {
+        var type;
+        var cookie = document.cookie.split(';')
+        for(var i = 0; i < cookie.length; i++) {
+          var cookiePair = cookie[i].split("=");
+          if("type" == cookiePair[0].trim()) {
+              type =  decodeURIComponent(cookiePair[1]);
+              break;
+          }
+      } 
+        if (type!=="A" && type!=="S") {
+          window.location.replace('http://localhost:4000/login');
+        }
+        else if(type!=="A"){
+            window.location.replace('http://localhost:4000/');
+        }
+    } 
+</script>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+
+<html>
+<link href="/Reader/reader.css" rel="stylesheet" id="bootstrap-css">
+<script src="/Reader/reader.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<title>Reader</title>
+
+<body onload=check()>
+
+<div class="container">
+
+    <div class="row" style="margin-top:20px">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+            <form role="form" action="/reader" method="post">
+                <fieldset>
+                    <h2>Hi, Which book would you like to read?</h2>
+                    <hr class="colorgraph">
+                    <div class="form-group">
+                        <input type="text" name="name" class="form-control input-lg" placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="phone" class="form-control input-lg" placeholder="Phone Number">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="address" class="form-control input-lg" placeholder="Address">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="id" class="form-control input-lg" placeholder="Your Id">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="book_id" class="form-control input-lg" placeholder="Book Id">
+                    </div>
+                    <hr class="colorgraph">
+                    <div class="row">
+                        <button type="submit"> Read Book </button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+</div>
+</body>
+<script >
+    body.onload() = check();
+    function check() {
+      var type;
+      var cookie = document.cookie.split(';')
+      for(var i = 0; i < cookie.length; i++) {
+        var cookiePair = cookie[i].split("=");
+        if("type" == cookiePair[0].trim()) {
+            type =  decodeURIComponent(cookiePair[1]);
+            break;
+        }
+    } 
+      if (type!=="A" && type!=="S") {
+        window.location.replace('http://localhost:4000/login');
+      }
+      else if(type!=="A"){
+          window.location.replace('http://localhost:4000/');
+      }
+  }
+  </script>
+
+</html>
